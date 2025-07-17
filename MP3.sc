@@ -10,7 +10,8 @@ MP3 {
 			//	= "/sw/bin/lame",
 			<>curlpath = "/usr/bin/curl",
 			<>oggdecpath
-				= "/opt/local/bin/oggdec"
+			//  = "/opt/local/bin/oggdec"
+	            = ""
 			;
 
 	var // These are filled by newCopyArgs:
@@ -24,7 +25,7 @@ MP3 {
 		// Check that at least *something* exists at the desired executable paths
 		this.checkForExecutable(lamepath, "lame", "lamepath", #["/opt/local/bin/lame"]);
 		this.checkForExecutable(curlpath, "curl", "curlpath");
-		this.checkForExecutable(oggdecpath, "oggdec", "oggdecpath", #["/usr/local/bin/oggdec", "/sw/bin/oggdec"]);
+		//this.checkForExecutable(oggdecpath, "oggdec", "oggdecpath", #["/usr/local/bin/oggdec", "/sw/bin/oggdec"]);
 	}
 
 	*checkForExecutable { |path, execname, varname, otherposs|
@@ -153,7 +154,7 @@ MP3 {
 			if(pid.isNil, {
 				^true; // We can only assume it's still playing - we have no better info!
 			}, {
-				if(pid.isPIDRunning, {
+				if(pid.pidRunning, {
 					^true;
 				}, {
 					playing = false;
